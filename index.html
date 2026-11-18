@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070d1b">
+  <meta name="description" content="ABR SMP resmi Minecraft sunucu sitesi. Sunucu bilgileri, katılım rehberi, topluluk bağlantısı ve kurallar.">
+  <title>ABR SMP | Resmî Sunucu Sitesi</title>
+  <style>
+    :root{--bg:#070d1b;--panel:rgba(12,23,41,.88);--panel2:#101e33;--line:rgba(107,177,225,.2);--cyan:#28d1ed;--blue:#3478f6;--text:#f4f8ff;--muted:#9aacc5;--max:1180px;--shadow:0 24px 75px rgba(0,0,0,.42)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;min-height:100vh;color:var(--text);background:#070d1b url('abr-smp-background.webp') center top/cover fixed no-repeat;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(180deg,rgba(4,9,20,.72),rgba(4,9,20,.88) 46%,#070d1b 100%)}
+    a{color:inherit;text-decoration:none}button{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+    .site-header{height:76px;position:sticky;top:0;z-index:50;background:rgba(4,9,21,.86);backdrop-filter:blur(18px);border-bottom:1px solid rgba(93,175,230,.15)}
+    .nav-wrap{width:min(var(--max),calc(100% - 42px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.08em;white-space:nowrap}
+    .brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#24d5ef,#2169e9 75%);border:1px solid rgba(255,255,255,.24);box-shadow:0 0 28px rgba(20,183,235,.3),inset 0 1px 0 rgba(255,255,255,.35);transition:.35s}
+    .brand:hover .brand-mark{transform:rotate(-8deg) scale(1.08);box-shadow:0 0 38px rgba(20,183,235,.58)}
+    .brand-name span{color:var(--cyan)}
+    .nav-links{display:flex;align-items:center;gap:28px;color:#d9e4f5;font-size:11px;font-weight:850;letter-spacing:.035em}
+    .nav-links a{position:relative;padding:10px 0;transition:color .2s}
+    .nav-links a:after{content:"";position:absolute;left:50%;bottom:0;width:0;height:2px;border-radius:3px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transition:.25s}
+    .nav-links a:hover{color:var(--cyan)}.nav-links a:hover:after{left:0;width:100%}
+    .btn{min-height:44px;padding:0 19px;border:1px solid transparent;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;gap:9px;color:#fff;font-size:11px;font-weight:950;cursor:pointer;position:relative;overflow:hidden;transition:transform .28s cubic-bezier(.2,.75,.25,1),box-shadow .28s,filter .28s,border-color .28s}
+    .btn:after{content:"";position:absolute;top:-120%;left:-45%;width:35%;height:340%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .65s}
+    .btn:hover:after{left:125%}.btn:hover{transform:translateY(-4px) scale(1.025);filter:brightness(1.08);box-shadow:0 15px 34px rgba(0,0,0,.38),0 0 24px rgba(34,178,235,.2)}
+    .btn-primary{background:linear-gradient(110deg,#0bbbdc,#2869ed);box-shadow:0 8px 26px rgba(24,133,239,.24),inset 0 1px 0 rgba(255,255,255,.28)}
+    .btn-discord{background:linear-gradient(110deg,#5865f2,#4542bb);box-shadow:0 8px 24px rgba(79,82,221,.22)}
+    .btn-ghost{background:rgba(13,25,44,.72);border-color:rgba(189,216,245,.5)}.btn-ghost:hover{border-color:rgba(99,221,255,.8);background:rgba(20,42,69,.94)}
+    .menu-toggle{display:none;width:43px;height:43px;border-radius:12px;border:1px solid var(--line);color:white;background:#111d30;font-size:21px;cursor:pointer}
+    .hero{min-height:690px;position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;text-align:center;background:linear-gradient(180deg,rgba(3,10,25,.16),rgba(3,10,25,.18) 48%,#070d1b 100%),url('abr-smp-background.webp') center 48%/cover no-repeat}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 22% 35%,rgba(15,192,207,.16),transparent 35%),radial-gradient(ellipse at 78% 23%,rgba(34,102,228,.2),transparent 33%)}
+    .aurora{position:absolute;z-index:0;top:-95px;left:-12%;width:125%;height:390px;opacity:.32;filter:blur(17px);pointer-events:none;background:linear-gradient(165deg,transparent 25%,rgba(18,204,197,.27) 39%,rgba(25,112,214,.2) 51%,transparent 65%);transform:rotate(-7deg);animation:aurora 13s ease-in-out infinite alternate}
+    @keyframes aurora{from{transform:translateX(-2%) rotate(-7deg);opacity:.2}to{transform:translateX(2%) rotate(-2deg);opacity:.42}}
+    .stars{position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:radial-gradient(2px 2px at 12% 22%,#bfeeff 50%,transparent 100%),radial-gradient(2px 2px at 26% 37%,#d7f5ff 50%,transparent 100%),radial-gradient(2px 2px at 72% 18%,#c8edff 50%,transparent 100%),radial-gradient(2px 2px at 85% 38%,#d7f5ff 50%,transparent 100%),radial-gradient(1px 1px at 42% 17%,#fff 50%,transparent 100%);background-size:480px 360px;animation:twinkle 5s ease-in-out infinite}
+    @keyframes twinkle{0%,100%{opacity:.22}50%{opacity:.7}}
+    .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}.particles i{position:absolute;bottom:-15px;width:4px;height:4px;border-radius:1px;background:#b9f4ff;box-shadow:0 0 12px 3px rgba(57,202,244,.55);animation:rise var(--dur,9s) linear var(--delay,0s) infinite}
+    @keyframes rise{0%{transform:translate3d(0,20px,0) scale(.6);opacity:0}15%{opacity:.7}85%{opacity:.45}100%{transform:translate3d(24px,-690px,0) scale(1.15);opacity:0}}
+    .hero-content{width:min(900px,calc(100% - 36px));padding:76px 0 126px;position:relative;z-index:2;animation:enter .95s cubic-bezier(.2,.75,.25,1) both}
+    @keyframes enter{from{opacity:0;transform:translateY(25px) scale(.985);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+    .emblem{width:105px;height:105px;margin:0 auto 24px;border-radius:32px;display:grid;place-items:center;font-size:35px;font-weight:1000;letter-spacing:-.09em;color:#f1fdff;background:linear-gradient(145deg,rgba(28,211,230,.22),rgba(34,105,230,.22));border:1px solid rgba(137,225,255,.5);box-shadow:0 0 55px rgba(15,190,228,.28),inset 0 0 25px rgba(67,164,247,.14);text-shadow:0 0 24px rgba(38,203,241,.7);animation:float 5s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(91,204,238,.32);border-radius:99px;color:#91eaff;background:rgba(8,29,51,.62);font-size:10px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    h1{margin:18px 0 11px;font-size:clamp(38px,6.2vw,68px);line-height:.99;letter-spacing:-.055em;font-weight:950;text-shadow:0 5px 35px rgba(0,0,0,.35)}h1 span{display:block;color:#78e7ff;text-shadow:0 0 35px rgba(20,185,239,.34)}
+    .hero-subtitle{max-width:650px;margin:19px auto 27px;color:#d2deed;font-size:15px;line-height:1.75;font-weight:550}
+    .server-address{width:min(520px,100%);margin:0 auto;padding:11px 11px 11px 19px;border-radius:17px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;background:rgba(8,17,35,.88);border:1px solid rgba(104,169,245,.58);box-shadow:0 15px 55px rgba(0,0,0,.3),0 0 32px rgba(16,157,219,.13);backdrop-filter:blur(12px);transition:.35s}
+    .server-address:hover{transform:translateY(-4px);box-shadow:0 22px 58px rgba(0,0,0,.48),0 0 34px rgba(16,157,219,.25)}
+    .address-label{color:#88a5c5;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}.address-value{color:white;font-weight:950;font-size:clamp(14px,2vw,18px);letter-spacing:.015em}.address-meta{color:#a5b7cf;font-size:10px;margin-top:4px}
+    .copy-btn{flex:0 0 auto;min-height:43px;padding:0 16px;border:0;border-radius:12px;color:white;cursor:pointer;font-size:11px;font-weight:950;background:linear-gradient(110deg,#08b8d8,#176fe6);box-shadow:0 5px 20px rgba(16,151,233,.24);transition:.25s}
+    .copy-btn:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(14,143,229,.4);filter:brightness(1.12)}
+    .hero-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}.hero-buttons .btn{min-height:48px;padding:0 20px}
+    .server-facts{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}.fact{padding:10px 14px;border-radius:11px;border:1px solid rgba(152,199,235,.17);background:rgba(7,17,32,.61);color:#c9d8e9;font-size:10px;font-weight:850;letter-spacing:.04em;transition:.25s}.fact b{color:#79e6ff;margin-right:5px}.fact:hover{transform:translateY(-4px);border-color:rgba(75,202,237,.5);box-shadow:0 12px 27px rgba(0,0,0,.3)}
+    .section{width:min(var(--max),calc(100% - 44px));margin:0 auto;padding:78px 0}.section-heading{text-align:center;margin-bottom:34px}.kicker{color:var(--cyan);font-size:10px;font-weight:950;letter-spacing:.18em;text-transform:uppercase}.section-heading h2{margin:9px 0 10px;font-size:clamp(27px,4vw,39px);letter-spacing:-.04em}.section-heading p{color:var(--muted);margin:0 auto;max-width:620px;font-size:13px;line-height:1.75}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info-card{padding:25px;border-radius:18px;border:1px solid rgba(92,153,207,.2);background:linear-gradient(145deg,rgba(16,30,51,.94),rgba(8,16,30,.96));min-height:190px}.card-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:rgba(18,169,214,.13);border:1px solid rgba(47,187,226,.22);color:#8aeaff;font-size:20px}.info-card h3{margin:17px 0 8px;font-size:15px}.info-card p{margin:0;color:#94a8c2;font-size:12px;line-height:1.8}.info-card strong{color:#e9f8ff}
+    .join-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.join-step{padding:23px;border-radius:17px;border:1px solid rgba(92,153,207,.18);background:rgba(12,23,41,.88)}.step-num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(145deg,#13bddb,#286bea);font-size:12px;font-weight:950;box-shadow:0 8px 25px rgba(20,137,227,.22)}.join-step h3{margin:15px 0 7px;font-size:14px}.join-step p{margin:0;color:#94a8c2;font-size:12px;line-height:1.75}
+    .rules-section{padding-top:60px}.rules-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 16px;padding:15px 18px;border:1px solid rgba(93,157,208,.2);border-radius:15px;background:rgba(10,20,36,.85)}.rules-toolbar p{margin:0;color:#9aacc5;font-size:11px;line-height:1.6}.rules-toolbar strong{color:#e8f7ff}.rules-list{display:grid;gap:12px}
+    details.rule-group{border-radius:17px;overflow:hidden;border:1px solid rgba(92,153,207,.2);background:linear-gradient(145deg,rgba(16,30,51,.95),rgba(8,16,30,.96));transition:border-color .3s,box-shadow .3s,transform .3s}
+    details.rule-group:hover{border-color:rgba(56,203,241,.45);box-shadow:0 20px 54px rgba(0,0,0,.33),0 0 22px rgba(12,174,220,.08);transform:translateY(-2px)}
+    details.rule-group[open]{border-color:rgba(45,194,229,.42);box-shadow:0 18px 48px rgba(0,0,0,.24)}
+    .rule-group summary{list-style:none;display:flex;align-items:center;gap:15px;padding:20px 22px;cursor:pointer;user-select:none}.rule-group summary::-webkit-details-marker{display:none}.rule-group summary:after{content:"+";margin-left:auto;color:#76e5ff;font-size:23px;font-weight:400;transition:transform .25s}.rule-group[open] summary:after{content:"−";transform:rotate(180deg)}
+    .rule-icon{width:39px;height:39px;flex:0 0 39px;border-radius:12px;display:grid;place-items:center;background:rgba(18,169,214,.13);border:1px solid rgba(47,187,226,.2);color:#8aeaff;font-size:15px;font-weight:950}.rule-title{font-size:14px;font-weight:900}.rule-count{display:block;margin-top:4px;color:#7f96b4;font-size:10px;font-weight:650}
+    .rule-body{padding:0 25px 22px 76px;color:#a9bad0;font-size:12px;line-height:1.85}.rule-body ul{margin:0;padding-left:18px}.rule-body li{padding:5px 0 5px 3px}.rule-body li::marker{color:#35c9ed}.rule-body strong{color:#edf9ff;font-weight:850}.rule-body a{color:#65dfff;text-decoration:underline;text-decoration-color:rgba(101,223,255,.45);text-underline-offset:3px}.rule-body a:hover{color:#fff}
+    .discord-strip{width:min(var(--max),calc(100% - 44px));margin:0 auto 78px;padding:28px 30px;border-radius:20px;border:1px solid rgba(98,112,242,.34);background:radial-gradient(ellipse at 0% 0%,rgba(87,98,240,.2),transparent 55%),rgba(13,19,40,.94);display:flex;align-items:center;justify-content:space-between;gap:20px}.discord-strip h3{margin:0 0 6px;font-size:18px}.discord-strip p{margin:0;color:#9aa9c3;font-size:12px;line-height:1.7}
+    footer{border-top:1px solid rgba(97,155,206,.15);background:rgba(5,10,20,.95)}.footer-inner{width:min(var(--max),calc(100% - 44px));margin:auto;min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#7f91aa;font-size:10px}.footer-inner strong{color:#dcecff;letter-spacing:.08em}.footer-links{display:flex;gap:18px}.footer-links a:hover{color:var(--cyan)}
+    .toast{position:fixed;left:50%;bottom:25px;z-index:90;transform:translate(-50%,18px);opacity:0;pointer-events:none;padding:13px 18px;max-width:calc(100% - 30px);border-radius:12px;border:1px solid rgba(93,211,242,.4);background:#10243a;color:#effaff;font-size:12px;font-weight:750;box-shadow:0 12px 40px rgba(0,0,0,.4);transition:.25s;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .cursor-shade{position:fixed;left:0;top:0;z-index:80;width:310px;height:310px;border-radius:50%;pointer-events:none;opacity:0;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,0,0,.29) 0%,rgba(0,0,0,.16) 31%,rgba(0,0,0,.045) 57%,transparent 73%);transition:opacity .25s;will-change:left,top}body.pointer-ready .cursor-shade{opacity:.8}
+    .spotlight{position:relative;isolation:isolate;transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s,border-color .3s}.spotlight:before{content:"";position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;opacity:0;background:radial-gradient(330px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.55),rgba(4,12,26,.18) 48%,transparent 76%);transition:opacity .25s}.spotlight:hover:before{opacity:1}.spotlight>*{position:relative;z-index:1}
+    .reveal{opacity:0;transform:translateY(25px);filter:blur(3px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1),filter .7s}.reveal.visible{opacity:1;transform:none;filter:blur(0)}
+    .to-top{position:fixed;right:22px;bottom:22px;z-index:40;width:43px;height:43px;border-radius:13px;border:1px solid rgba(109,189,232,.35);background:rgba(9,23,42,.88);color:#bcefff;font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s;backdrop-filter:blur(10px)}.to-top.show{opacity:1;pointer-events:auto;transform:none}.to-top:hover{background:#12345a;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    @media(max-width:900px){.nav-links{gap:16px}.info-grid{grid-template-columns:repeat(2,1fr)}.hero{min-height:660px}}
+    @media(max-width:680px){.site-header{height:67px}.nav-wrap{width:calc(100% - 30px)}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:67px;left:0;right:0;padding:16px 22px 21px;flex-direction:column;align-items:stretch;gap:0;background:rgba(5,11,23,.98);border-bottom:1px solid var(--line)}.nav-links.open{display:flex}.nav-links a{padding:13px 5px;border-bottom:1px solid rgba(120,160,200,.1)}.nav-wrap>.btn{display:none}.hero{min-height:680px}.hero-content{padding:60px 0 110px}.emblem{width:84px;height:84px;border-radius:25px;font-size:28px;margin-bottom:20px}.hero-subtitle{font-size:13px}.server-address{padding:9px;gap:8px}.address-value{font-size:13px}.copy-btn{min-height:40px;padding:0 11px;font-size:10px}.hero-buttons .btn{flex:1 1 145px;padding:0 11px}.section{width:calc(100% - 30px);padding:61px 0}.info-grid,.join-panel{grid-template-columns:1fr}.info-card{min-height:0}.rules-toolbar{align-items:flex-start;flex-direction:column}.rule-group summary{padding:17px 15px;gap:11px}.rule-body{padding:0 17px 19px 65px}.discord-strip{width:calc(100% - 30px);padding:23px;align-items:flex-start;flex-direction:column;margin-bottom:58px}.footer-inner{width:calc(100% - 30px);padding:22px 0;align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}.cursor-shade{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none;filter:none}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#anasayfa" aria-label="ABR SMP anasayfa"><span class="brand-mark">ABR</span><span class="brand-name">ABR <span>SMP</span></span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+        <a href="#anasayfa">ANASAYFA</a>
+        <a href="#bilgiler">SUNUCU BİLGİLERİ</a>
+        <a href="#katilim">NASIL KATILIRIM?</a>
+        <a href="#kurallar">KURALLAR</a>
+      </nav>
+      <a class="btn btn-discord" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">DISCORD'A KATIL ↗</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="anasayfa">
+      <div class="aurora"></div><div class="stars"></div><div class="particles" id="particles"></div>
+      <div class="hero-content">
+        <div class="emblem">ABR</div>
+        <div class="eyebrow">✦ MINECRAFT SMP SUNUCUSU</div>
+        <h1>GÜCÜNÜ KANITLA,<span>ABR SMP'YE KATIL!</span></h1>
+        <p class="hero-subtitle">Maceraya hazır mısın? Dünyanı keşfet, kendi hikâyeni oluştur ve ABR SMP topluluğunun bir parçası ol.</p>
+        <div class="server-address spotlight">
+          <div><div class="address-label">SUNUCU IP ADRESİ</div><div class="address-value" id="serverIp">play.abrdns.com</div><div class="address-meta">Desteklenen sürümler: 1.9 – 26.2</div></div>
+          <button class="copy-btn" id="copyIp">IP'Yİ KOPYALA ▣</button>
+        </div>
+        <div class="hero-buttons">
+          <a class="btn btn-discord" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">☁ DISCORD'A KATIL</a>
+          <a class="btn btn-ghost" href="#kurallar">SUNUCU KURALLARI ↓</a>
+        </div>
+        <div class="server-facts"><div class="fact"><b>✦</b> ABR SMP</div><div class="fact"><b>⌘</b> play.abrdns.com</div><div class="fact"><b>◈</b> 1.9 – 26.2</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="bilgiler">
+      <div class="section-heading reveal"><div class="kicker">ABR SMP'Yİ KEŞFET</div><h2>Sunucu Bilgileri</h2><p>Bağlantı bilgilerini kolayca bul, topluluğa katıl ve maceraya hazırlan.</p></div>
+      <div class="info-grid">
+        <article class="info-card spotlight reveal"><div class="card-icon">⌘</div><h3>Sunucu Adresi</h3><p>Sunucuya bağlanmak için <strong>play.abrdns.com</strong> adresini kullan. IP'yi kopyalamak için ana sayfadaki butona basabilirsin.</p></article>
+        <article class="info-card spotlight reveal"><div class="card-icon">⚙</div><h3>Sürüm Desteği</h3><p>Belirtilen sürüm aralığı: <strong>1.9 – 26.2</strong>. Bağlanmadan önce oyun sürümünü kontrol et.</p></article>
+        <article class="info-card spotlight reveal"><div class="card-icon">☁</div><h3>ABR SMP Topluluğu</h3><p>Duyurular ve topluluk iletişimi için resmî Discord sunucusuna katılabilirsin.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="katilim">
+      <div class="section-heading reveal"><div class="kicker">MACERAYA BAŞLA</div><h2>Sunucuya Nasıl Katılırım?</h2><p>Bağlanmak için aşağıdaki adımları takip et.</p></div>
+      <div class="join-panel">
+        <article class="join-step spotlight reveal"><span class="step-num">01</span><h3>Minecraft'ı aç</h3><p>Oyunu başlat ve ana menüden çok oyunculu / sunucular bölümüne gir.</p></article>
+        <article class="join-step spotlight reveal"><span class="step-num">02</span><h3>Sunucuyu ekle</h3><p>Yeni sunucu ekleme seçeneğini aç ve sunucu adresi alanına <strong>play.abrdns.com</strong> yaz.</p></article>
+        <article class="join-step spotlight reveal"><span class="step-num">03</span><h3>Bağlan ve katıl</h3><p>Kaydet, sunucu listesinden ABR SMP'yi seç ve bağlan. Yardım için Discord'a gelebilirsin.</p></article>
+      </div>
+    </section>
+
+    <section class="section rules-section" id="kurallar">
+      <div class="section-heading reveal"><div class="kicker">TOPLULUK REHBERİ</div><h2>ABR SMP Kuralları</h2><p>Sunucuda yer alan tüm oyuncuların aşağıdaki kuralları dikkatlice okuması beklenir.</p></div>
+      <div class="rules-toolbar reveal"><p><strong>Kuralları dikkatlice oku.</strong><br>Başlıklara tıklayarak her kategorinin maddelerini açıp kapatabilirsin.</p><button class="btn btn-ghost" id="toggleRules" type="button">TÜMÜNÜ AÇ +</button></div>
+      <div class="rules-list">
+        <details class="rule-group spotlight reveal" open>
+          <summary><span class="rule-icon">§</span><span><span class="rule-title">Genel Hükümler</span><span class="rule-count">8 MADDE</span></span></summary>
+          <div class="rule-body"><ul>
+            <li>Kurallar yönetim ekibi tarafından istenildiği zaman değiştirilebilir.</li>
+            <li>Sunucumuza kayıt olan herkes kuralları ve sözleşmeleri okumuş ve kabul etmiş sayılmaktadır.</li>
+            <li>Ceza süreleri yetkililerin insafına bağlıdır.</li>
+            <li>Kurallar ve sözleşmeler okunmadığı süreçte hiçbir sorundan <strong>ABRSMP</strong> sorumlu değildir.</li>
+            <li>Hesap güvenliğinizden <strong>ABRSMP</strong> sorumlu değildir.</li>
+            <li>Yetkililer istedikleri zaman envanterinizde oynamalar, değişiklikler yapabilir.</li>
+            <li><strong>ABRSMP</strong> kurallara uyulmadığı tespit edilirse habersiz bir şekilde hesap feshetme hakkını saklı tutar.</li>
+            <li><strong>ABRSMP</strong> sunucusunun işleyişini, düzenini, gidişatını bozacak hertürlü işlem yasaktır.</li>
+          </ul></div>
+        </details>
+        <details class="rule-group spotlight reveal">
+          <summary><span class="rule-icon">✎</span><span><span class="rule-title">Dil ve Davranış Kuralları</span><span class="rule-count">6 MADDE</span></span></summary>
+          <div class="rule-body"><ul>
+            <li>Küfür, küfür kısaltımı, küçümseyici dil kullanımı yasaktır.</li>
+            <li>Oyuncuları tehtit edecek, rahatsız edecek ifadeler kullanmak yasaktır.</li>
+            <li><strong>CraftMire</strong> ve sponsorları dışındaki sunucu, website vb. hakkında reklam yapmak yasaktır.</li>
+            <li>Yetkilileri gereksiz yere meşgul etmek yasaktır.</li>
+            <li>Kötü amaçlı, virüslü linkler paylaşmak yasaktır.</li>
+            <li>Tartışma çıkartmak, ortalığı karıştırmak yasaktır.</li>
+          </ul></div>
+        </details>
+        <details class="rule-group spotlight reveal">
+          <summary><span class="rule-icon">♫</span><span><span class="rule-title">Ses ve İçerik Kuralları</span><span class="rule-count">4 MADDE</span></span></summary>
+          <div class="rule-body"><ul>
+            <li>Cinsellik, NSFW, ifşa içeren paylaşımlar yapmak yasaktır.</li>
+            <li>Sohbet kanallarında +18 konuşmak, mesaj, görsel vb. göndermek yasaktır.</li>
+            <li>Her hangi bir kanalda üyeleri, bağırarak ya da garip sesler çıkartmak yasaktır.</li>
+            <li>Düzene zarar verecek davranışlar yapmak yasaktır.</li>
+          </ul></div>
+        </details>
+        <details class="rule-group spotlight reveal">
+          <summary><span class="rule-icon">⚔</span><span><span class="rule-title">Oyun Kuralları</span><span class="rule-count">7 MADDE</span></span></summary>
+          <div class="rule-body"><ul>
+            <li>Hile kullanımı, 3. parti yazılım kullanımı, size avantaj sağlayacak tüm mod ve yazılım kullanımı yasaktır.</li>
+            <li>Hile bulundurmak, hile kullanımına teşvik etmek, hile ile takım olmak yasaktır.</li>
+            <li>Sunucudan IP engellenildiğinde proxy, vpn vb. uygulamalar sayesinde başka hesaplardan giriş yapmak yasaktır.</li>
+            <li>3'den fazla hesap ile kayıt olmak yasaktır.</li>
+            <li>Sunucuya kayıt olurken uygunsuz, küfür içerikli isim kullanımında kullanıcıyı yasaklama hakkına sahiptir.</li>
+            <li>Kişisel bilgilerinizi isteyen kişilerin isteklerini reddetme hakkınız vardır.</li>
+            <li>Sunucu açıklarını kullanmak yasaktır.</li>
+          </ul></div>
+        </details>
+        <details class="rule-group spotlight reveal">
+          <summary><span class="rule-icon">⌕</span><span><span class="rule-title">Hile Kontrolleri</span><span class="rule-count">4 MADDE</span></span></summary>
+          <div class="rule-body"><ul>
+            <li>Yetkililerin sizi, siz oyundayken hile kontrole alma hakkı vardır.</li>
+            <li>Yetkililer hileyi tespit etmek için yardımcı programlar kullanabilir.</li>
+            <li>Hile kontrolüne gelinmediğinde, gelmek için olan süreniz dolduğunda, hile bulunduğunda, gerekli programları indirmediğinde yetkililerin kullanıcıyı yasaklama hakkı vardır.</li>
+            <li>Video kayıtları incelendiğinde hile bariz bir şekilde belli olduğunda yetkililerin kullanıcıyı yasaklama hakkı vardır.</li>
+          </ul></div>
+        </details>
+        <details class="rule-group spotlight reveal">
+          <summary><span class="rule-icon">⚖</span><span><span class="rule-title">Bazı Ek Kurallar</span><span class="rule-count">3 MADDE / DIŞ BAĞLANTILAR</span></span></summary>
+          <div class="rule-body"><ul>
+            <li><a href="https://www.egm.gov.tr/siber/sibersucnedir" target="_blank" rel="noopener noreferrer">Siber suç</a> işlemek yasaktır.</li>
+            <li>Discordun <a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer">Hizmet koşullarına</a> uyulmalıdır.</li>
+            <li>Discordun <a href="https://discord.com/guidelines" target="_blank" rel="noopener noreferrer">Topluluk kurallarına</a> uyulmalıdır.</li>
+          </ul></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="discord-strip spotlight reveal" id="discord">
+      <div><h3>ABR SMP topluluğuna katıl</h3><p>Duyuruları takip et, destek al ve diğer oyuncularla iletişim kur.</p></div>
+      <a class="btn btn-discord" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">DISCORD'A KATIL ↗</a>
+    </section>
+  </main>
+
+  <footer><div class="footer-inner"><div><strong>ABR SMP</strong><span> &nbsp;© <span id="year"></span> Tüm hakları saklıdır.</span></div><div class="footer-links"><a href="#anasayfa">Anasayfa</a><a href="#bilgiler">Sunucu bilgileri</a><a href="#kurallar">Kurallar</a><a href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">Discord</a></div></div></footer>
+  <div class="cursor-shade" id="cursorShade" aria-hidden="true"></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="to-top" id="toTop" aria-label="Sayfanın başına dön">↑</button>
+  <script>
+    const toast=document.getElementById('toast');let toastTimer;
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600)}
+    document.getElementById('year').textContent=new Date().getFullYear();
+    document.getElementById('copyIp').addEventListener('click',async()=>{const ip=document.getElementById('serverIp').textContent.trim();try{await navigator.clipboard.writeText(ip);showToast('Sunucu IP adresi kopyalandı: '+ip)}catch(e){const temp=document.createElement('textarea');temp.value=ip;document.body.appendChild(temp);temp.select();document.execCommand('copy');temp.remove();showToast('Sunucu IP adresi kopyalandı: '+ip)}});
+    const menuToggle=document.getElementById('menuToggle'),navLinks=document.getElementById('navLinks');
+    menuToggle.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'×':'☰'});
+    navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰'}));
+    const ruleGroups=[...document.querySelectorAll('.rule-group')],toggleRules=document.getElementById('toggleRules');
+    toggleRules.addEventListener('click',()=>{const shouldOpen=ruleGroups.some(group=>!group.open);ruleGroups.forEach(group=>group.open=shouldOpen);toggleRules.textContent=shouldOpen?'TÜMÜNÜ KAPAT −':'TÜMÜNÜ AÇ +'});
+    const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+    document.querySelectorAll('.spotlight').forEach(card=>{card.addEventListener('pointermove',event=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mx',(event.clientX-rect.left)+'px');card.style.setProperty('--my',(event.clientY-rect.top)+'px')})});
+    const shade=document.getElementById('cursorShade');
+    if(window.matchMedia('(pointer:fine)').matches){window.addEventListener('pointermove',event=>{shade.style.left=event.clientX+'px';shade.style.top=event.clientY+'px';document.body.classList.add('pointer-ready')},{passive:true});document.addEventListener('pointerleave',()=>document.body.classList.remove('pointer-ready'))}
+    const particleLayer=document.getElementById('particles');for(let i=0;i<22;i++){const particle=document.createElement('i');particle.style.left=(Math.random()*100)+'%';particle.style.setProperty('--dur',(7+Math.random()*8)+'s');particle.style.setProperty('--delay',(-Math.random()*14)+'s');particleLayer.appendChild(particle)}
+    const toTop=document.getElementById('toTop');window.addEventListener('scroll',()=>toTop.classList.toggle('show',window.scrollY>520),{passive:true});toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
+</body>
+</html>
