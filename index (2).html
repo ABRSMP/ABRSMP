@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070d1b" />
+  <meta name="description" content="ABR SMP - Minecraft macerana katıl. Sunucu IP'si, Discord ve sunucu kuralları." />
+  <title>ABR SMP | Minecraft Sunucusu</title>
+  <style>
+    :root {
+      --bg: #070d1b;
+      --panel: rgba(13, 24, 43, .92);
+      --panel-2: #101d32;
+      --line: rgba(75, 165, 220, .22);
+      --cyan: #19c7ed;
+      --blue: #2875f0;
+      --text: #f4f8ff;
+      --muted: #9aacc5;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image: linear-gradient(180deg, rgba(4, 9, 20, .78), rgba(4, 9, 20, .86)), url("abr-smp-background.webp");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+    button, input { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      height: 76px;
+      background: rgba(4, 9, 21, .88);
+      border-bottom: 1px solid rgba(93, 175, 230, .13);
+      backdrop-filter: blur(16px);
+    }
+    .nav-wrap {
+      width: min(var(--max), calc(100% - 44px)); height: 100%; margin: auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 950; letter-spacing: .08em; white-space: nowrap; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px;
+      color: #eafaff; font-size: 14px; font-weight: 1000; letter-spacing: -.05em;
+      background: linear-gradient(145deg, #24d5ef, #2169e9 75%);
+      box-shadow: 0 0 28px rgba(20, 183, 235, .3), inset 0 1px 0 rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.22);
+    }
+    .brand-name { font-size: 16px; }
+    .brand-name span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 29px; color: #d9e4f5; font-size: 12px; font-weight: 800; letter-spacing: .035em; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 44px; padding: 0 19px; border-radius: 13px; color: #fff; font-size: 12px; font-weight: 900;
+      cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, filter .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .btn-primary { background: linear-gradient(110deg, #0bbbdc, #2869ed); box-shadow: 0 8px 26px rgba(24, 133, 239, .24), inset 0 1px 0 rgba(255,255,255,.28); }
+    .btn-outline { background: rgba(13, 25, 44, .7); border-color: rgba(189, 216, 245, .55); }
+    .btn-discord { background: linear-gradient(110deg, #5865f2, #4542bb); box-shadow: 0 8px 24px rgba(79, 82, 221, .2); }
+    .menu-toggle { display: none; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); color: white; background: #111d30; font-size: 21px; cursor: pointer; }
+
+    .hero {
+      min-height: 690px; position: relative; isolation: isolate; overflow: hidden;
+      display: grid; place-items: center; text-align: center;
+      background-color: #070d1b;
+      background-image: linear-gradient(180deg, rgba(3, 10, 25, .25) 0%, rgba(3, 10, 25, .22) 44%, rgba(5, 10, 20, .78) 100%), url("abr-smp-background.webp");
+      background-size: cover;
+      background-position: center 48%;
+      background-repeat: no-repeat;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -2;
+      background: linear-gradient(180deg, rgba(5,12,27,.14), rgba(5,10,22,.12) 55%, #070d1b 100%);
+    }
+    .sky-glow { position: absolute; z-index: -3; inset: -12%; opacity: .85; filter: blur(7px);
+      background: radial-gradient(ellipse at 22% 32%, rgba(15, 192, 207, .25), transparent 34%), radial-gradient(ellipse at 79% 20%, rgba(34, 102, 228, .28), transparent 30%), radial-gradient(ellipse at 52% 60%, rgba(16, 89, 141, .22), transparent 42%); }
+    .aurora { position: absolute; z-index: -2; top: -85px; left: -12%; width: 125%; height: 390px; opacity: .36; filter: blur(16px);
+      background: linear-gradient(165deg, transparent 25%, rgba(18, 204, 197, .25) 37%, rgba(25, 112, 214, .22) 49%, transparent 64%);
+      transform: rotate(-7deg); animation: aurora 12s ease-in-out infinite alternate; }
+    @keyframes aurora { from { transform: translateX(-2%) rotate(-7deg); opacity: .23; } to { transform: translateX(2%) rotate(-2deg); opacity: .43; } }
+    .landscape { display: none; }
+    .stars { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(2px 2px at 12% 22%, #bfeeff 50%, transparent 100%), radial-gradient(2px 2px at 26% 37%, #d7f5ff 50%, transparent 100%), radial-gradient(2px 2px at 72% 18%, #c8edff 50%, transparent 100%), radial-gradient(2px 2px at 85% 38%, #d7f5ff 50%, transparent 100%), radial-gradient(2px 2px at 64% 46%, #d7f5ff 50%, transparent 100%), radial-gradient(1px 1px at 42% 17%, #fff 50%, transparent 100%);
+      background-size: 480px 360px; opacity: .44; }
+    .hero-content { width: min(900px, calc(100% - 36px)); padding: 72px 0 120px; position: relative; z-index: 2; animation: heroEntrance .95s cubic-bezier(.2,.75,.25,1) both; }
+    .hero-emblem {
+      animation: emblemFloat 5s ease-in-out infinite;
+      width: 104px; height: 104px; margin: 0 auto 24px; border-radius: 32px; display: grid; place-items: center;
+      font-size: 34px; font-weight: 1000; letter-spacing: -.09em; color: #f1fdff;
+      background: linear-gradient(145deg, rgba(28,211,230,.2), rgba(34,105,230,.2));
+      border: 1px solid rgba(137, 225, 255, .48); box-shadow: 0 0 55px rgba(15, 190, 228, .24), inset 0 0 25px rgba(67, 164, 247, .12);
+      text-shadow: 0 0 24px rgba(38, 203, 241, .7);
+    }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid rgba(91, 204, 238, .32); border-radius: 99px; color: #91eaff; background: rgba(8, 29, 51, .58); font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .hero h1 { margin: 18px 0 11px; font-size: clamp(38px, 6.2vw, 67px); line-height: .99; letter-spacing: -.055em; font-weight: 950; text-shadow: 0 5px 35px rgba(0,0,0,.3); }
+    .hero h1 span { display: block; color: #78e7ff; text-shadow: 0 0 35px rgba(20, 185, 239, .32); }
+    .hero-subtitle { max-width: 630px; margin: 19px auto 26px; color: #d2deed; font-size: 15px; line-height: 1.7; font-weight: 550; }
+    .server-address {
+      width: min(520px, 100%); margin: 0 auto; padding: 10px 11px 10px 19px; border-radius: 17px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left;
+      background: rgba(8, 17, 35, .86); border: 1px solid rgba(104, 169, 245, .58);
+      box-shadow: 0 15px 55px rgba(0,0,0,.28), 0 0 32px rgba(16, 157, 219, .12); backdrop-filter: blur(12px);
+    }
+    .address-label { color: #88a5c5; font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+    .address-value { color: white; font-weight: 900; font-size: clamp(14px, 2vw, 18px); letter-spacing: .015em; }
+    .address-meta { color: #a5b7cf; font-size: 10px; margin-top: 4px; }
+    .copy-btn { flex: 0 0 auto; min-height: 43px; padding: 0 16px; border: 0; border-radius: 12px; color: white; cursor: pointer; font-size: 11px; font-weight: 950; background: linear-gradient(110deg, #08b8d8, #176fe6); box-shadow: 0 5px 20px rgba(16, 151, 233, .22); }
+    .hero-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .hero-buttons .btn { min-height: 48px; padding: 0 20px; }
+    .server-facts { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
+    .fact { padding: 9px 13px; border-radius: 11px; border: 1px solid rgba(152, 199, 235, .15); background: rgba(7, 17, 32, .55); color: #c9d8e9; font-size: 10px; font-weight: 800; letter-spacing: .04em; }
+    .fact b { color: #79e6ff; margin-right: 5px; }
+    .hero-bottom-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 155px; background: linear-gradient(transparent, var(--bg)); z-index: 1; pointer-events: none; }
+
+    .section { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; padding: 78px 0; }
+    .section-heading { text-align: center; margin-bottom: 34px; }
+    .section-kicker { color: var(--cyan); font-size: 10px; font-weight: 950; letter-spacing: .18em; text-transform: uppercase; }
+    .section-heading h2 { margin: 9px 0 10px; font-size: clamp(27px, 4vw, 39px); letter-spacing: -.04em; }
+    .section-heading p { color: var(--muted); margin: 0 auto; max-width: 570px; font-size: 13px; line-height: 1.7; }
+    .login-panel {
+      overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; min-height: 420px;
+      border: 1px solid rgba(49, 147, 209, .3); border-radius: 25px;
+      background: linear-gradient(130deg, rgba(14, 25, 44, .97), rgba(8, 15, 29, .98));
+      box-shadow: 0 28px 80px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .login-form-side { padding: clamp(27px, 5vw, 58px); }
+    .mini-brand { display: inline-flex; align-items: center; gap: 9px; color: #85e6ff; font-size: 10px; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; }
+    .mini-brand-mark { width: 29px; height: 29px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, #0ebddc, #266dea); color: white; font-size: 10px; letter-spacing: -.08em; }
+    .login-form-side h2 { margin: 18px 0 9px; font-size: 34px; letter-spacing: -.05em; }
+    .login-description { margin: 0 0 27px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .field { margin: 0 0 17px; }
+    .field label { display: block; margin-bottom: 8px; color: #dbe7f5; font-size: 11px; font-weight: 850; }
+    .input-wrap { display: flex; align-items: center; gap: 11px; height: 52px; padding: 0 14px; border-radius: 13px; background: #080f1d; border: 1px solid rgba(129, 164, 203, .2); transition: border-color .2s, box-shadow .2s; }
+    .input-wrap:focus-within { border-color: rgba(38, 196, 235, .75); box-shadow: 0 0 0 3px rgba(31, 179, 223, .1); }
+    .input-icon { color: #35c9f0; font-size: 16px; width: 20px; text-align: center; }
+    .input-wrap input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: white; font-size: 13px; }
+    .input-wrap input::placeholder { color: #61738d; }
+    .show-password { border: 0; background: transparent; color: #8197b5; cursor: pointer; padding: 5px; }
+    .forgot-row { display: flex; justify-content: flex-end; margin: -8px 0 20px; }
+    .forgot-row span { color: #37c9f0; font-size: 10px; font-weight: 800; }
+    .login-submit { width: 100%; min-height: 49px; border: 0; border-radius: 13px; color: white; cursor: pointer; font-weight: 950; font-size: 12px; letter-spacing: .04em; background: linear-gradient(105deg, #09b9d7, #2868ec); box-shadow: 0 10px 26px rgba(17, 133, 226, .22); }
+    .demo-note { margin-top: 14px; color: #8397b2; font-size: 10px; line-height: 1.6; text-align: center; }
+    .login-visual { position: relative; min-height: 420px; display: grid; place-items: center; overflow: hidden; border-left: 1px solid rgba(83, 151, 213, .18); background: radial-gradient(ellipse at 50% 59%, rgba(14, 143, 195, .22), transparent 42%), linear-gradient(145deg, rgba(14, 31, 52, .8), rgba(7, 14, 27, .45)); }
+    .login-visual::before { content: ""; position: absolute; width: 265px; height: 265px; border: 1px solid rgba(80, 191, 238, .12); border-radius: 50%; box-shadow: 0 0 0 28px rgba(80,191,238,.025), 0 0 0 58px rgba(80,191,238,.02); }
+    .character-wrap { z-index: 1; text-align: center; padding: 30px; }
+    .character-caption { color: #d3e8f5; font-size: 12px; font-weight: 850; margin-bottom: 18px; }
+    .character-svg { width: 180px; max-width: 45vw; height: 245px; filter: drop-shadow(0 20px 22px rgba(0,0,0,.34)); animation: characterFloat 4s ease-in-out infinite; }
+    .platform { width: 180px; height: 20px; margin: -3px auto 19px; border-radius: 50%; background: radial-gradient(ellipse, rgba(23, 186, 234, .55), rgba(13, 85, 139, .2) 55%, transparent 72%); filter: blur(3px); animation: platformPulse 3s ease-in-out infinite; }
+    .character-caption small { display: block; color: #7894b2; font-size: 10px; font-weight: 600; margin-top: 7px; }
+
+    .rules-section { position: relative; }
+    .rules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .rule-card { position: relative; padding: 23px 22px 22px; border-radius: 17px; border: 1px solid rgba(92, 153, 207, .18); background: linear-gradient(145deg, rgba(16, 30, 51, .94), rgba(9, 17, 31, .95)); transition: transform .2s, border-color .2s; }
+    .rule-card:hover { transform: translateY(-4px); border-color: rgba(36, 192, 230, .48); }
+    .rule-number { display: inline-grid; place-items: center; width: 33px; height: 33px; border-radius: 10px; color: #8aeaff; background: rgba(18, 169, 214, .13); border: 1px solid rgba(47, 187, 226, .2); font-size: 11px; font-weight: 950; }
+    .rule-card h3 { margin: 15px 0 8px; font-size: 14px; }
+    .rule-card p { margin: 0; color: #94a8c2; font-size: 11px; line-height: 1.75; }
+    .rules-disclaimer { text-align: center; color: #788da9; font-size: 10px; margin: 23px 0 0; }
+    .discord-strip { width: min(var(--max), calc(100% - 44px)); margin: 0 auto 78px; padding: 26px 30px; border-radius: 20px; border: 1px solid rgba(98, 112, 242, .32); background: radial-gradient(ellipse at 0% 0%, rgba(87, 98, 240, .18), transparent 55%), #10152a; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .discord-strip h3 { margin: 0 0 6px; font-size: 17px; }
+    .discord-strip p { margin: 0; color: #9aa9c3; font-size: 11px; }
+    footer { border-top: 1px solid rgba(97, 155, 206, .13); background: #050a14; }
+    .footer-inner { width: min(var(--max), calc(100% - 44px)); margin: auto; min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #7f91aa; font-size: 10px; }
+    .footer-inner strong { color: #dcecff; letter-spacing: .08em; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--cyan); }
+    .toast { position: fixed; left: 50%; bottom: 25px; z-index: 50; transform: translate(-50%, 18px); opacity: 0; pointer-events: none; padding: 13px 18px; max-width: calc(100% - 30px); border-radius: 12px; border: 1px solid rgba(93, 211, 242, .4); background: #10243a; color: #effaff; font-size: 12px; font-weight: 750; box-shadow: 0 12px 40px rgba(0,0,0,.4); transition: .25s ease; text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Hareketli arka plan, imleç gölgesi ve etkileşim efektleri */
+    @keyframes heroEntrance {
+      from { opacity: 0; transform: translateY(24px) scale(.985); filter: blur(5px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @keyframes emblemFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-9px) rotate(2deg); }
+    }
+    @keyframes characterFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes platformPulse {
+      0%, 100% { opacity: .65; transform: scaleX(.92); }
+      50% { opacity: 1; transform: scaleX(1.08); }
+    }
+    @keyframes particleDrift {
+      0% { transform: translate3d(0, 24px, 0) scale(.65); opacity: 0; }
+      15% { opacity: .65; }
+      85% { opacity: .45; }
+      100% { transform: translate3d(28px, -115px, 0) scale(1.15); opacity: 0; }
+    }
+    @keyframes starTwinkle { 0%, 100% { opacity: .24; } 50% { opacity: .72; } }
+
+    .stars { animation: starTwinkle 5s ease-in-out infinite; }
+    .ambient-particles { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .ambient-particles span {
+      position: absolute; bottom: -18px; width: 4px; height: 4px; border-radius: 1px;
+      background: #b9f4ff; box-shadow: 0 0 12px 3px rgba(57, 202, 244, .55);
+      animation: particleDrift var(--duration, 9s) linear var(--delay, 0s) infinite;
+    }
+    .cursor-shade {
+      position: fixed; left: 0; top: 0; z-index: 80; width: 280px; height: 280px;
+      border-radius: 50%; pointer-events: none; opacity: 0; transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,0,0,.25) 0%, rgba(0,0,0,.13) 30%, rgba(0,0,0,.035) 53%, transparent 72%);
+      transition: opacity .25s ease; will-change: left, top;
+    }
+    body.pointer-ready .cursor-shade { opacity: .72; }
+
+    .spotlight-card {
+      position: relative; isolation: isolate;
+      transition: transform .35s cubic-bezier(.2,.75,.25,1), box-shadow .35s ease, border-color .3s ease;
+    }
+    .spotlight-card::after {
+      content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit;
+      pointer-events: none; opacity: 0;
+      background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,.58), rgba(4,12,26,.2) 46%, transparent 76%);
+      transition: opacity .28s ease;
+    }
+    .spotlight-card:hover::after { opacity: 1; }
+    .spotlight-card > * { position: relative; z-index: 1; }
+    .spotlight-card:hover {
+      border-color: rgba(56, 203, 241, .52);
+      box-shadow: 0 25px 75px rgba(0,0,0,.48), 0 0 34px rgba(12,174,220,.12);
+    }
+    .tilt-card { transform-style: preserve-3d; will-change: transform; }
+    .tilt-card:hover {
+      transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) translateY(-6px) scale(1.012);
+    }
+    .btn, .copy-btn, .login-submit, .menu-toggle {
+      position: relative; overflow: hidden;
+      transition: transform .28s cubic-bezier(.2,.75,.25,1), box-shadow .28s ease, filter .28s ease, border-color .28s ease;
+    }
+    .btn::after, .copy-btn::after, .login-submit::after {
+      content: ""; position: absolute; top: -120%; left: -45%; width: 35%; height: 340%;
+      transform: rotate(25deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.24), transparent);
+      transition: left .65s ease;
+    }
+    .btn:hover::after, .copy-btn:hover::after, .login-submit:hover::after { left: 125%; }
+    .btn:hover { transform: translateY(-4px) scale(1.025); box-shadow: 0 15px 34px rgba(0,0,0,.34), 0 0 24px rgba(34,178,235,.2); }
+    .btn-outline:hover { border-color: rgba(99,221,255,.8); background: rgba(20,42,69,.9); }
+    .copy-btn:hover, .login-submit:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(14,143,229,.38); filter: brightness(1.12); }
+    .brand-mark { transition: transform .35s ease, box-shadow .35s ease; }
+    .brand:hover .brand-mark { transform: rotate(-8deg) scale(1.08); box-shadow: 0 0 35px rgba(20,183,235,.55), inset 0 1px 0 rgba(255,255,255,.35); }
+    .nav-links a { position: relative; padding: 9px 0; }
+    .nav-links a::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); transition: width .25s ease, left .25s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; left: 0; }
+    .input-wrap { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease; }
+    .input-wrap:hover { transform: translateY(-2px); border-color: rgba(38,196,235,.48); box-shadow: 0 10px 28px rgba(0,0,0,.2); background: #0b1627; }
+    .rule-card:hover .rule-number { transform: rotate(-7deg) scale(1.1); box-shadow: 0 0 20px rgba(27,190,230,.18); }
+    .rule-number { transition: transform .3s ease, box-shadow .3s ease; }
+    .fact { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .fact:hover { transform: translateY(-4px); border-color: rgba(75,202,237,.5); box-shadow: 0 12px 27px rgba(0,0,0,.28); }
+    .server-address { transition: transform .35s ease, box-shadow .35s ease, border-color .3s ease; }
+    .server-address:hover { transform: translateY(-4px); box-shadow: 0 22px 58px rgba(0,0,0,.42), 0 0 32px rgba(16,157,219,.24); }
+
+    .motion-ready .reveal { opacity: 0; transform: translateY(28px); filter: blur(3px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.75,.25,1), filter .75s ease; }
+    .motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+    .rules-grid .rule-card:nth-child(2) { transition-delay: .07s; }
+    .rules-grid .rule-card:nth-child(3) { transition-delay: .14s; }
+    .rules-grid .rule-card:nth-child(4) { transition-delay: .21s; }
+    .rules-grid .rule-card:nth-child(5) { transition-delay: .28s; }
+    .rules-grid .rule-card:nth-child(6) { transition-delay: .35s; }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 16px; }
+      .nav-actions .btn-outline { display: none; }
+      .rules-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { min-height: 660px; }
+    }
+    @media (max-width: 680px) {
+      .site-header { height: 67px; }
+      .nav-wrap { width: calc(100% - 30px); }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 67px; left: 0; right: 0; padding: 18px 22px 22px; flex-direction: column; align-items: stretch; gap: 0; background: rgba(5, 11, 23, .98); border-bottom: 1px solid var(--line); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 13px 5px; border-bottom: 1px solid rgba(120,160,200,.1); }
+      .nav-actions .btn { min-height: 39px; padding: 0 12px; font-size: 10px; }
+      .hero { min-height: 700px; }
+      .hero-content { padding: 65px 0 115px; }
+      .hero-emblem { width: 83px; height: 83px; border-radius: 25px; font-size: 28px; margin-bottom: 20px; }
+      .hero-subtitle { font-size: 13px; }
+      .server-address { padding: 9px; gap: 8px; }
+      .address-value { font-size: 13px; }
+      .copy-btn { min-height: 40px; padding: 0 11px; font-size: 10px; }
+      .hero-buttons .btn { flex: 1 1 145px; padding: 0 11px; }
+      .section { width: calc(100% - 30px); padding: 62px 0; }
+      .login-panel { grid-template-columns: 1fr; }
+      .login-form-side { padding: 29px 23px; }
+      .login-visual { min-height: 310px; border-left: 0; border-top: 1px solid rgba(83, 151, 213, .18); }
+      .character-svg { height: 190px; width: 140px; }
+      .platform { width: 145px; }
+      .rules-grid { grid-template-columns: 1fr; }
+      .discord-strip { width: calc(100% - 30px); margin-bottom: 55px; padding: 23px; flex-direction: column; align-items: flex-start; }
+      .discord-strip .btn { width: 100%; }
+      .footer-inner { width: calc(100% - 30px); padding: 22px 0; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 680px) {
+      body { background-attachment: scroll; }
+      .hero { background-position: 58% center; }
+      .cursor-shade { display: none; }
+      .spotlight-card::after { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .motion-ready .reveal { opacity: 1; transform: none; filter: none; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#anasayfa" aria-label="ABR SMP ana sayfa">
+        <span class="brand-mark">ABR</span>
+        <span class="brand-name">ABR <span>SMP</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+        <a class="active" href="#anasayfa">ANASAYFA</a>
+        <a href="#sunucu">SUNUCU</a>
+        <a href="#giris">OYUNCU GİRİŞİ</a>
+        <a href="#kurallar">KURALLAR</a>
+        <a href="#discord">DESTEK</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#giris">GİRİŞ YAP</a>
+        <a class="btn btn-primary" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">DISCORD <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="anasayfa">
+      <div class="sky-glow"></div><div class="aurora"></div><div class="stars"></div><div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
+      <!-- Harici görsel gerektirmeyen, sayfanın içinde çizilmiş Minecraft esintili manzara -->
+      <svg class="landscape" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#315d80"/><stop offset="1" stop-color="#09172b"/></linearGradient>
+          <linearGradient id="castle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#294a68"/><stop offset="1" stop-color="#0a172a"/></linearGradient>
+          <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d4f4ff"/><stop offset="1" stop-color="#779db9"/></linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <path d="M0 420 170 270 295 390 475 205 650 420 830 260 1010 410 1190 220 1370 390 1510 270 1600 360V760H0Z" fill="url(#mountain)" opacity=".55"/>
+        <path d="m0 525 145-120 105 70 150-185 130 150 145-120 155 150 145-180 160 175 140-120 145 145 180-110v280H0Z" fill="#102b45" opacity=".8"/>
+        <path d="m105 458 44-53 42 28-35-5-18 20Zm245-112 48-56 43 54-35-17-20 14Zm390 42 45-46 44 51-45-19Zm390-56 44-55 50 58-48-19Z" fill="url(#snow)" opacity=".72"/>
+        <!-- Uzak kale -->
+        <g fill="url(#castle)" stroke="#527895" stroke-opacity=".35" stroke-width="3">
+          <path d="M875 470V310h48v-60h62v60h38v160Zm135 0V275h55v-75h73v75h44v195Zm150 0V330h45v-57h64v57h33v140Z"/>
+          <path d="M862 310h74l-37-54Zm130-35h105l-52-75Zm152 55h83l-41-52Z"/>
+          <rect x="965" y="350" width="22" height="36" rx="7" fill="#53d7f2" stroke="none"/><rect x="1090" y="310" width="23" height="39" rx="7" fill="#51d9f3" stroke="none"/><rect x="1190" y="370" width="18" height="31" rx="6" fill="#55c9ee" stroke="none"/>
+          <rect x="1020" y="395" width="32" height="75" rx="15" fill="#09182b" stroke="none"/><rect x="1135" y="385" width="30" height="85" rx="15" fill="#09182b" stroke="none"/>
+        </g>
+        <g fill="#ffcc73" filter="url(#glow)" opacity=".95"><rect x="973" y="359" width="7" height="18"/><rect x="1098" y="319" width="7" height="19"/><rect x="1195" y="377" width="7" height="16"/><rect x="1031" y="409" width="9" height="22"/><rect x="1144" y="400" width="9" height="22"/></g>
+        <!-- Ön plandaki buzlu platform ve kayalar -->
+        <path d="m0 590 160-74 115 35 128-71 155 80 146-67 112 75 152-65 142 77 132-70 155 64v186H0Z" fill="#09182b"/>
+        <path d="m0 590 160-74 115 35-118-10-67 49Zm404-25 154 5 146-67-106 81-90 9Zm674 10 142 77-104-38-81-15Z" fill="#6d9ab7" opacity=".38"/>
+        <g fill="#b9efff" opacity=".75"><path d="m250 553 12-32 9 32Z"/><path d="m720 570 15-41 12 41Z"/><path d="m1330 595 13-34 10 34Z"/></g>
+      </svg>
+      <div class="hero-content" id="sunucu">
+        <div class="hero-emblem">ABR</div>
+        <div class="eyebrow">✦ MINECRAFT SMP SUNUCUSU</div>
+        <h1>GÜCÜNÜ KANITLA,<span>ABR SMP'YE KATIL!</span></h1>
+        <p class="hero-subtitle">Maceraya hazır mısın? Dostlarınla dünyanı kur, keşfet, mücadele et ve ABR SMP topluluğunun bir parçası ol.</p>
+        <div class="server-address">
+          <div>
+            <div class="address-label">SUNUCU IP ADRESİ</div>
+            <div class="address-value" id="serverIp">play.abrdns.com</div>
+            <div class="address-meta">Minecraft Java Edition · Sürüm 1.9 – 26.2</div>
+          </div>
+          <button class="copy-btn" id="copyIp">IP'Yİ KOPYALA ▣</button>
+        </div>
+        <div class="hero-buttons">
+          <a class="btn btn-discord" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">☁ DISCORD'A KATIL</a>
+          <a class="btn btn-outline" href="#kurallar">SUNUCU KURALLARI ↓</a>
+        </div>
+        <div class="server-facts">
+          <div class="fact"><b>✦</b> ABR SMP</div>
+          <div class="fact"><b>⌘</b> play.abrdns.com</div>
+          <div class="fact"><b>◈</b> 1.9 – 26.2</div>
+        </div>
+      </div>
+      <div class="hero-bottom-fade"></div>
+    </section>
+
+    <section class="section" id="giris">
+      <div class="section-heading reveal">
+        <div class="section-kicker">OYUNCU PANELİ</div>
+        <h2>ABR SMP'ye Hoş Geldin</h2>
+        <p>Oyuncu giriş alanı burada. Bu bölüm şimdilik yalnızca tasarım/demo amaçlıdır; gerçek hesap sistemiyle bağlantısı yoktur.</p>
+      </div>
+      <div class="login-panel spotlight-card reveal">
+        <div class="login-form-side">
+          <div class="mini-brand"><span class="mini-brand-mark">ABR</span> ABR SMP OYUNCU PANELİ</div>
+          <h2>Giriş Yap</h2>
+          <p class="login-description">Kullanıcı adını yaz ve ABR SMP macerana hazır ol.</p>
+          <form id="demoLogin" autocomplete="off">
+            <div class="field">
+              <label for="username">KULLANICI ADI</label>
+              <div class="input-wrap"><span class="input-icon">♟</span><input id="username" name="username" type="text" maxlength="16" placeholder="Minecraft kullanıcı adın" autocomplete="off" /></div>
+            </div>
+            <div class="field">
+              <label for="password">ŞİFRE</label>
+              <div class="input-wrap"><span class="input-icon">▣</span><input id="password" name="password" type="password" placeholder="Bu demo için gerçek şifre girme" autocomplete="new-password" /><button type="button" class="show-password" id="togglePassword" aria-label="Şifreyi göster">◎</button></div>
+            </div>
+            <div class="forgot-row"><span>Demo giriş alanı</span></div>
+            <button class="login-submit" type="submit">GİRİŞ YAP&nbsp; →</button>
+          </form>
+          <p class="demo-note">Bu form gerçek giriş yapmaz. Yazdığın bilgiler gönderilmez ve kaydedilmez. Gerçek şifreni burada kullanma.</p>
+        </div>
+        <div class="login-visual">
+          <div class="character-wrap">
+            <div class="character-caption">ABR SMP seni bekliyor!<small>Macera şimdi başlıyor.</small></div>
+            <svg class="character-svg" viewBox="0 0 180 245" role="img" aria-label="Blok tarzında Minecraft karakter illüstrasyonu">
+              <defs><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#19d4d0"/><stop offset="1" stop-color="#087fa6"/></linearGradient></defs>
+              <!-- kafa -->
+              <path d="M53 17 111 5 137 30 130 91 65 96 43 70Z" fill="#754a32"/>
+              <path d="m53 17 58-12 17 20-62 10Z" fill="#96613e"/><path d="m43 38 23-12 6 62-29-18Z" fill="#895638"/>
+              <path d="M67 49h17v12H67zM108 44h16v12h-16z" fill="#a9ecfa"/><path d="M70 49h8v8h-8zM111 44h8v8h-8z" fill="#263c69"/><path d="m88 64 17 2-7 10H85Z" fill="#593b31"/>
+              <!-- gövde -->
+              <path d="m54 91 73-2 15 82-91 2Z" fill="url(#shirt)"/><path d="m54 91-21 11-8 64 23 4 17-53Zm73-2 22 12 8 64-22 3-16-55Z" fill="#13a9ad"/><path d="m70 168 69 1-4 43-67 1Z" fill="#443caa"/>
+              <path d="m70 205 31 1-2 31H66Zm35 1 30 1 4 30h-34Z" fill="#34317f"/><path d="M65 234h37v9H62Zm41 0h36v9h-33Z" fill="#20283b"/>
+              <path d="m54 91 73-2-5 11-62 2Z" fill="#42e4df" opacity=".5"/>
+            </svg>
+            <div class="platform"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rules-section" id="kurallar">
+      <div class="section-heading reveal">
+        <div class="section-kicker">TOPLULUK REHBERİ</div>
+        <h2>Sunucu Kuralları</h2>
+        <p>Herkes için adil, güvenli ve keyifli bir oyun ortamı oluşturmak için kurallara uy.</p>
+      </div>
+      <div class="rules-grid">
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">01</span><h3>Hile Kullanımı Yasak</h3><p>Fly, X-Ray, KillAura, Speed ve oyuncuya haksız avantaj sağlayan benzeri hileler yasaktır.</p></article>
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">02</span><h3>Saygılı Ol</h3><p>Oyunculara ve yetkililere hakaret, tehdit, ayrımcı söylem ve taciz içeren davranışlarda bulunma.</p></article>
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">03</span><h3>Spam ve Reklam Yapma</h3><p>Sohbeti gereksiz mesajlarla doldurmak, tekrar tekrar mesaj atmak ve izinsiz reklam yapmak yasaktır.</p></article>
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">04</span><h3>Açıkları Kötüye Kullanma</h3><p>Oyun veya sunucu hatalarından bilerek yararlanma. Bir açık fark edersen yetkililere bildir.</p></article>
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">05</span><h3>Yapılara Zarar Verme</h3><p>İzinsiz şekilde oyuncuların yapıtlarını ve çevresini gereksiz yere tahrip etme. Raid kurallarına uygun hareket et.</p></article>
+        <article class="rule-card spotlight-card tilt-card reveal"><span class="rule-number">06</span><h3>Yetkililerin Uyarılarına Uy</h3><p>Sunucu düzenini korumak için yetkililerin makul uyarılarına ve duyurularına dikkat et.</p></article>
+      </div>
+      <p class="rules-disclaimer">Kurallar sunucu yönetimi tarafından güncellenebilir. Güncel duyurular için Discord sunucusunu takip et.</p>
+    </section>
+
+    <section class="discord-strip spotlight-card reveal" id="discord">
+      <div><h3>ABR SMP topluluğuna katıl</h3><p>Duyuruları takip et, destek al ve diğer oyuncularla iletişim kur.</p></div>
+      <a class="btn btn-discord" href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">DISCORD'A KATIL ↗</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><strong>ABR SMP</strong><span> &nbsp;© <span id="year"></span> Tüm hakları saklıdır.</span></div>
+      <div class="footer-links"><a href="#anasayfa">Anasayfa</a><a href="#kurallar">Kurallar</a><a href="https://discord.gg/SEXG56BjPz" target="_blank" rel="noopener noreferrer">Discord</a></div>
+    </div>
+  </footer>
+  <div class="cursor-shade" id="cursorShade" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    document.getElementById('copyIp').addEventListener('click', async () => {
+      const ip = document.getElementById('serverIp').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(ip);
+        showToast('Sunucu IP adresi kopyalandı: ' + ip);
+      } catch (error) {
+        const temp = document.createElement('textarea');
+        temp.value = ip;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
+        showToast('Sunucu IP adresi kopyalandı: ' + ip);
+      }
+    });
+
+    document.getElementById('togglePassword').addEventListener('click', () => {
+      const password = document.getElementById('password');
+      const isHidden = password.type === 'password';
+      password.type = isHidden ? 'text' : 'password';
+      document.getElementById('togglePassword').setAttribute('aria-label', isHidden ? 'Şifreyi gizle' : 'Şifreyi göster');
+    });
+
+    document.getElementById('demoLogin').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      if (!username) {
+        showToast('Lütfen bir kullanıcı adı yaz.');
+        document.getElementById('username').focus();
+        return;
+      }
+      // Bu yalnızca arayüz demosudur. Bilgiler hiçbir yere gönderilmez veya kaydedilmez.
+      showToast('Merhaba ' + username + '! Bu giriş alanı şu anda demo amaçlıdır.');
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Kaydırma ile gelen yumuşak bölüm animasyonları.
+    document.documentElement.classList.add('motion-ready');
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('is-visible'));
+    }
+
+    // Kart üzerindeki gölge ve hafif 3D eğim imleci takip eder.
+    const interactiveCards = document.querySelectorAll('.spotlight-card');
+    interactiveCards.forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        card.style.setProperty('--mx', `${x}px`);
+        card.style.setProperty('--my', `${y}px`);
+        if (card.classList.contains('tilt-card') && event.pointerType !== 'touch') {
+          const rx = ((x / rect.width) - .5) * 4;
+          const ry = ((y / rect.height) - .5) * -4;
+          card.style.setProperty('--rx', `${rx}deg`);
+          card.style.setProperty('--ry', `${ry}deg`);
+        }
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--mx', '50%');
+        card.style.setProperty('--my', '50%');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+
+    // Masaüstünde imlecin altında yumuşak, koyu bir gölge oluşur.
+    const cursorShade = document.getElementById('cursorShade');
+    let cursorFrame = null;
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('pointermove', event => {
+        if (cursorFrame) cancelAnimationFrame(cursorFrame);
+        cursorFrame = requestAnimationFrame(() => {
+          cursorShade.style.left = `${event.clientX}px`;
+          cursorShade.style.top = `${event.clientY}px`;
+          document.body.classList.add('pointer-ready');
+        });
+      }, { passive: true });
+      document.addEventListener('pointerleave', () => document.body.classList.remove('pointer-ready'));
+    }
+
+    // Hero bölümüne hafif hareket eden parıltı parçacıkları ekle.
+    const particleLayer = document.getElementById('ambientParticles');
+    if (particleLayer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (let i = 0; i < 25; i++) {
+        const particle = document.createElement('span');
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.setProperty('--duration', `${7 + Math.random() * 8}s`);
+        particle.style.setProperty('--delay', `${-Math.random() * 14}s`);
+        particle.style.opacity = `${.25 + Math.random() * .55}`;
+        const size = 2 + Math.random() * 3;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particleLayer.appendChild(particle);
+      }
+    }
+
+  </script>
+</body>
+</html>
